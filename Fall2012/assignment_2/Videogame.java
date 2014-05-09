@@ -5,15 +5,13 @@ public class Videogame extends Rental implements Cloneable{
 
     public Videogame(String title, String genre, double averageRating,
         int numTimesChecked, Date releaseDate, String platform){
-        super(title, genre, averageRating, numTimesChecked, releaseDate);
+        super(2.0, title, genre, averageRating, numTimesChecked, releaseDate);
         this.platform = platform;
-
-        this.costPerDay = 2.0;
     }
 
     public Videogame(String title, String genre, Date releaseDate,
         String platform){
-        return Videogame(title, genre, 0, 0, releaseDate, platform);
+        this(title, genre, 0, 0, releaseDate, platform);
     }
 
     public String getPlatform(){

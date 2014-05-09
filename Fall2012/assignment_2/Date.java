@@ -1,4 +1,4 @@
-public class Date implements Comparable, Cloneable{
+public class Date implements Comparable<Date>, Cloneable{
     private int day;
     private int month;
     private int year;

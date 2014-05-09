@@ -5,8 +5,7 @@ public class Movie extends Rental implements Cloneable{
 
     public Movie(String title, String genre, double averageRating,
         int numTimesChecked, Date releaseDate, String format){
-        super(title, genre, averageRating, numTimesChecked, releaseDate);
-        this.costPerDay = 1.0;
+        super(1.0, title, genre, averageRating, numTimesChecked, releaseDate);
         this.format = format;
     }
 

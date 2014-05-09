@@ -1,4 +1,6 @@
-public abstract class Rental implements Comparable{
+import java.util.Comparator;
+
+public abstract class Rental implements Comparable<Rental>, Comparator<Rental>{
     protected String title;
     protected String genre;
     protected double costPerDay;
