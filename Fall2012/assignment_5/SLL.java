@@ -1,3 +1,8 @@
+// Tui Popenoe
+// COP 3503 - Assignment 5
+// SLL.java
+// ©2014
+
 public class SLL<T>{
     public Node<T> head;
     public Node<T> tail;
@@ -8,9 +13,9 @@ public class SLL<T>{
     }
 
     public SLL(T data){
-        Node n = new Node(data);
-        this.head = n;
-        this.tail = n;
+        Node<T> node = new Node<T>(data);
+        this.head = node;
+        this.tail = node;
     }
 
     public SLL(Node<T> node){
@@ -27,32 +32,30 @@ public class SLL<T>{
         if(this.head == null && this.tail == null){
             return true;
         }
-
         return false;
     }
 
     public void append(T data){
-        Node n = new Node(data);
-            if(this.isEmpty()){
-                this.head = n;
-                this.tail = n;
-            }
-            else{
-                Node temp = this.tail;
-                this.temp.next = n;
-                this.tail = n;
-           }
+        Node<T> node = new Node<T>(data);
+        if(this.isEmpty()){
+            this.head = node;
+            this.tail = node;
+        }
+        else{
+            this.tail.next = node;
+            this.tail = node;
+       }
     }
 
     public void prepend(T data){
-        Node n = new Node(data);
+        Node<T> node = new Node<T>(data);
         if(this.isEmpty()){
-            this.head = n;
-            this.tail = n;
+            this.head = node;
+            this.tail = node;
         }
         else{
-            n.next = this.head;
-            this.head = n;
+            node.next = this.head;
+            this.head = node;
         }
     }
 
@@ -79,15 +82,16 @@ public class SLL<T>{
     }
 
     public Node<T> get(T data){
-        Node n = this.head;
-        while(this.n.hasNext()){
-            if(this.n.data == data){
-                return this.n;
+        Node<T> node = this.head;
+        while(node.next != null){
+            if(node.data == data){
+                return node;
             }
             else{
-                n = this.n.next;
+                node = node.next;
             }
         }
+        return null;
     }
 
     public Node<T> get(int index){
@@ -98,7 +102,7 @@ public class SLL<T>{
         }
         while(true){
             if(currentNode == null){
-                break;
+                return null;
             }
             if(position == index){
                 return currentNode;
@@ -108,67 +112,54 @@ public class SLL<T>{
                 position++;
             }
         }
-        return null;
     }
 
     public int indexOf(T data){
-        Node<T> node = new Node(data);
         Node<T> currentNode = this.head;
         int index = 0;
-        boolean found = false;
-
-        while(!found){
+        while(true){
             if(currentNode == null){
-                break;
+                return -1;
             }
-            if(node.equals(currentNode)){
-                found = true;
+            if(data.equals(currentNode.data)){
                 return index;
             }
-
-            index ++;
-            currentNode = currentNode.next;
-        }
-
-        if(!found){
-            return -1;
+            else{
+                index++;
+                currentNode = currentNode.next;
+            }
         }
     }
 
     public int indexOf(Node<T> node){
         Node<T> currentNode = this.head;
         int index = 0;
-        boolean found = false;
 
-        while(!found){
+        while(true){
             if(currentNode == null){
-                break;
+                return -1;
             }
             if(node.equals(currentNode)){
-                found = true;
                 return index;
             }
-
-            index ++;
-            currentNode = currentNode.next;
-        }
-
-        if(!found){
-            return -1;
+            else{
+                index ++;
+                currentNode = currentNode.next;
+            }
         }
     }
 
     public boolean remove(T data){
-        Node n = this.head;
-        while(n.hasNext()){
-            if(n.next.data == data){
-                Node temp = n.next;
-                if(temp.hasNext()){
-                    n.next = temp.next;
+        Node<T> node = this.head;
+        while(node.next != null){
+            if(node.next.data.equals(data)){
+                Node<T> tempNode = node.next;
+                if(tempNode.next != null){
+                    node.next = tempNode.next;
                 }
                 else{
-                    this.tail = n;
-                    n.next = null;
+                    this.tail = node;
+                    node.next = null;
                 }
                 return true;
             }
@@ -177,21 +168,21 @@ public class SLL<T>{
     }
 
     public boolean remove(Node<T> node){
-        Node n = this.head;
-            while(n.hasNext()){
-                if(n.next.equals(node)){
-                    Node temp = n.next;
-                    if(temp.hasNext()){
-                        n.next = temp.next;
-                    }
-                    else{
-                        this.tail = n;
-                        n.next = null;
-                    }
-                    return true;
+        Node<T> currentNode = this.head;
+        while(currentNode.next != null){
+            if(currentNode.next.equals(node)){
+                Node<T> tempNode = currentNode.next;
+                if(tempNode.next != null){
+                    currentNode.next = tempNode.next;
                 }
+                else{
+                    this.tail = currentNode;
+                    currentNode.next = null;
+                }
+                return true;
             }
-            return false;
+        }
+        return false;
     }
 
     public boolean remove(int index){
@@ -219,6 +210,9 @@ public class SLL<T>{
     public int size(){
         int size = 0;
         Node<T> currentNode = this.head;
+        if(this.head == null){
+            return size;
+        }
         while(true){
             if(currentNode.next != null){
                 currentNode = currentNode.next;
@@ -228,7 +222,6 @@ public class SLL<T>{
                 return size;
             }
         }
-        return 0;
     }
 
     public void clear(){

@@ -1,10 +1,15 @@
+// Tui Popenoe
+// COP 3503 - Assignment 5
+// Node.java
+// ©2014
+
 public class Node<T> {
     public T data;
     public Node<T> next;
 
     public Node(){
         this.data = null;
-        this.head = null;
+        this.next = null;
     }
 
     public Node(T data){

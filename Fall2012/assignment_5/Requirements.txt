@@ -1,0 +1,139 @@
+COP 3503 - Project 5
+
+The SLL<T> class
+
+The SLL class represents a singly-linked list. You will use Java Generics to
+allow the class to store any kind of object.
+
+The class has been broken up into multiple parts. Please make sure you
+ complete (and test!) one part before moving onto the rest.
+
+NOTE: Try to solve the insert and remove methods by only traversing the list
+ once.
+
+NOTE: Indices start from 0.
+
+NOTE: Be careful about updating the head and tail nodes for insert and remove.
+ What if both head and tail are the same?
+
+NOTE: If you are storing Integer objects in the SLL, there might be some
+confusion between using the "get(T data)" and "get(index)" methods (same for
+remove).
+In that case use ".get(new Integer(int))" for calling ".get(T data)" and ".get(
+int)" for calling ".get(int index)".
+
+PART A (properties and constructors):
+Properties:
+----------
+1) public Node<T> head.   // the head of the list
+2) public Node<T> tail.   // the tail of the list
+
+NOTE: NO other properties are allowed inside the SLL class apart from the head
+ and tail nodes.
+
+Constructors:
+------------
+1) public SLL():
+    Sets head and tail to null.
+
+2) public SLL(T data):
+    Creates a Node with the passed in data.
+    Sets head and tail to that node.
+
+3) public SLL(Node<T> node):
+    Sets head and tail to the passed in node.
+
+4) public SLL(Node<T> head, Node<T> tail):
+    Sets head and tail nodes appropriately.
+    Assume head and tail are already the head and tail of a list.
+
+
+PART B (adding/inserting to the list):
+Add the following methods:
+NOTE: Remember to handle cases where you have to update the head/tail nodes.
+(NOTE: Do NOT use the size() method for any of the following methods - it will
+ result in an inefficient method)
+-------------------------
+1) public boolean isEmpty():
+    Returns true if list is empty, false otherwise.
+
+2) public void append(T data):
+    Appends a node with data to the end of the list.
+    (Remember to handle the case where the list is empty - which nodes will
+     you have to update?)
+
+3) public void prepend(T data):
+    Appends a node with data to the front of the list.
+    (Remember to handle the case where the list is empty - which nodes will
+    you have to update?)
+
+4) public boolean insert(T data, int index):
+    Inserts a node with data at a specific index.
+    You are inserting a new node at that index and shifting everything
+    forward. You are NOT replacing.
+    Returns true if successful, false if not.
+    If index is equal to the size of the list (when you have reached the end
+    of the list), we add the node to the end of the list.
+    If index is greater than the size of the list, we are unable to insert it
+    into the list.
+    Do NOT use size() for this method.
+
+    Examples:
+    Assume you have a list of characters: a->b->c->d
+    What the list will look like after the following operations:
+        insert(e,0):    e->a->b->c->d
+        insert(f,2):    e->a->f->b->c->d
+        insert(g,6):    e->a->f->b->c->d->g
+        insert(h,8):    (invalid - index is too high, method returns false.
+        list unchanged)
+
+
+PART C (searching the list):
+Add the following methods:
+(NOTE: Use the equals() method for comparing data)
+(NOTE: Do NOT use the size() method for any of the following methods - it will
+ result in an inefficient method)
+-------------------------
+1) public Node<T> get(T data):
+    Returns the first Node in the list which holds the passed in data.
+    Returns null if there is no Node with that data.
+
+2) public Node<T> get(int index):
+    Returns the Node at the passed in index.
+    Returns null if the index is invalid.
+
+3) public int indexOf(T data):
+    Returns the index of the first Node which holds the passed in data.
+    Returns -1 if there is no Node with that data.
+
+4) public int indexOf(Node<T> node):
+    Returns the index of the passed in node.
+    Returns -1 if the node is not found.
+
+PART D (removing from the list):
+Add the following methods:
+(NOTE: Use the equals() method for comparing data)
+-------------------------
+1) public boolean remove(T data):
+    Removes the first Node in the list which holds the passed in data.
+    Returns true if Node found and removed, false otherwise.
+
+2) public boolean remove(Node<T> node):
+    Removes the Node passed in.
+    Returns true if Node found and removed, false otherwise.
+
+3) public boolean remove(int index):
+    Removes the node at a certain index.
+    Returns true if node found and removed, false otherwise.
+    Returns false if index is invalid.
+
+4) public int size():
+    Returns the size of the list.
+
+5) public void clear():
+    Empties the list.
+
+
+Please make sure you test all the methods thoroughly. Try to print out all the
+objects inside the list (on one line) after calling each method. This will
+allow you to quickly verify if your method works.
