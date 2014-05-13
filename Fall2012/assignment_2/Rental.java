@@ -1,3 +1,8 @@
+// Tui Popenoe
+// COP 3503 - Assignment 2
+// Rental.java
+// ©2014
+
 import java.util.Comparator;
 
 public abstract class Rental implements Comparable<Rental>, Comparator<Rental>{
@@ -23,10 +28,7 @@ public abstract class Rental implements Comparable<Rental>, Comparator<Rental>{
 
     public Rental(double costPerDay, String title, String genre,
         Date releaseDate){
-        this.costPerDay = costPerDay;
-        this.title = title;
-        this.genre = genre;
-        this.releaseDate = releaseDate;
+        this(costPerDay, title, genre, 0, 0, releaseDate);
     }
 
     public String getTitle(){
@@ -88,20 +90,20 @@ public abstract class Rental implements Comparable<Rental>, Comparator<Rental>{
 
     public double checkIn(int numDays, double rating){
         this.checkedOut = false;
-        this.averageRating =(((this.averageRating*numTimesChecked-1) + rating)
-            / this.numTimesChecked);
+        this.averageRating =(((this.averageRating * this.numTimesChecked-1) +
+            rating) / this.numTimesChecked);
         return numDays*this.costPerDay;
     }
 
     public int compareTo(Rental rental){
-        return title.compareTo(rental.title);
+        return title.compareTo(rental.getTitle());
     }
 
     public int compare(Rental rental1, Rental rental2){
-        if(rental1.getAverageRating() < rental2.getAverageRating()){
+        if(rental1.getNumTimesChecked() < rental2.getNumTimesChecked()){
             return 1;
         }
-        else if(rental1.getAverageRating() == rental2.getAverageRating()){
+        else if(rental1.getNumTimesChecked() == rental2.getNumTimesChecked()){
             return 0;
         }
         else{
@@ -111,9 +113,9 @@ public abstract class Rental implements Comparable<Rental>, Comparator<Rental>{
 
     public String toString(){
         return  this.title +
-                "Genre: " + this.genre +
-                "Release Date: " + this.genre +
-                "Rating: " + this.averageRating +
-                "Times Checked Out: " + this.numTimesChecked;
+                ", Genre: " + this.genre +
+                ", Release Date: " + this.genre +
+                ", Rating: " + this.averageRating +
+                ", Times Checked Out: " + this.numTimesChecked;
     }
 }

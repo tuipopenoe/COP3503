@@ -1,3 +1,8 @@
+// Tui Popenoe
+// COP 3503 - Assignment 2
+// RatingComparison.java
+// ©2014
+
 import java.util.Comparator;
 
 public class RatingComparison implements Comparator<Rental>{

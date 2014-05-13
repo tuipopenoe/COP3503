@@ -1,3 +1,8 @@
+// Tui Popenoe
+// COP 3503 - Assignment 2
+// Videogame.java
+// ©2014
+
 public class Videogame extends Rental implements Cloneable{
     private String platform;
 
@@ -6,7 +11,7 @@ public class Videogame extends Rental implements Cloneable{
     public Videogame(String title, String genre, double averageRating,
         int numTimesChecked, Date releaseDate, String platform){
         super(2.0, title, genre, averageRating, numTimesChecked, releaseDate);
-        this.platform = platform;
+        setPlatform(platform);
     }
 
     public Videogame(String title, String genre, Date releaseDate,
@@ -24,7 +29,7 @@ public class Videogame extends Rental implements Cloneable{
 
     public Object clone() throws CloneNotSupportedException{
         Videogame clone = (Videogame) super.clone();
-        clone.platform = this.platform;
+        clone.releaseDate = (Date)this.releaseDate.clone();
 
         return clone;
     }

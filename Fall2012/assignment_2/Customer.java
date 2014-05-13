@@ -1,3 +1,8 @@
+// Tui Popenoe
+// COP 3503 - Assignment 2
+// Customer.java
+// ©2014
+
 import java.util.ArrayList;
 
 public class Customer {
@@ -8,7 +13,7 @@ public class Customer {
 
     public Customer(String name){
         this.name = name;
-        this.totalCharge = 0.0;
+        this.totalCharge = 0;
 
         this.checkedOut = new ArrayList<Rental>();
         this.checkedOutHistory = new ArrayList<Rental>();
@@ -59,8 +64,8 @@ public class Customer {
 
     public boolean checkIn(Rental rental, int numDays, double rating){
         if(this.checkedOut.contains(rental)){
-            rental.checkIn(numDays, rating);
-            this.totalCharge += (rental.costPerDay * numDays);
+            double cost = rental.checkIn(numDays, rating);
+            this.totalCharge += cost;
             this.checkedOut.remove(rental);
             this.checkedOutHistory.add(rental);
             return true;

@@ -1,3 +1,9 @@
+// Tui Popenoe
+// COP 3503 - Assignment 1
+// Course.java
+// ©2014
+
+
 public class Course{
     private String type;
     private String title;

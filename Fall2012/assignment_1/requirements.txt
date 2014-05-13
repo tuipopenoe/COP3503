@@ -1,0 +1,452 @@
+COP 3503 - Project 1
+
+Assigned: September 17, 2012
+
+Due: September 28, 2012 11:59 PM
+
+Project Submission Guidelines
+
+UPDATE: Solution here.
+
+Description:
+
+For this project you will be modeling a university's system - including it's
+courses, students and instructors.
+A system like this could form the basis for a much-bigger system like ISIS or
+Sakai. You will allow students to add courses, drop courses, etc.
+You are required to create the following classes (all of them are going to be
+public classes in their own files).
+Click on the links to get the descriptions:
+
+UPDATE September 24: The sample TestDriver and sample output have been posted.
+
+UPDATE September 21: There was a small error in the description of the
+toString() methods for Student/UndergradStudent/GradStudent/Instructor. They
+now match with the description of the Person class.
+
+NOTE on using diff for comparison:. Use the following command for comparing
+your output file with mine (to be given later). Make sure you use it before
+submitting:
+        diff -B file1 file2
+
+The "-B" ignores extra lines.
+
+NOTE on null objects:. Since arrays will sometimes have no objects (null
+objects), when printing out the contents of the array just print out the null
+objects.
+
+NOTE: Try to work on one class at a time and make sure they compile properly.
+Keep testing as you write more code.
+
+*******************************************************************************
+Person:
+The Person class
+
+The Person class is abstract.
+Properties:
+----------
+1) protected String name.
+2) protected int UFID.
+3) protected String dob.     // Date Of Birth = format: month/day/year. ex.:
+01/21/1990
+
+Constructors:
+------------
+1) public Person(String name, int UFID, String dob)
+   // Set's the properties appropriately
+
+
+Methods:
+--------
+get/set methods for all the properties (you should be able to figure out the
+return types/parameters):
+
+-getName/setName
+
+-getUFID/setUFID
+
+-getDob/setDob
+
+-toString() - The toString() method is public and returns a String.
+              It should return a String in this format:
+
+              Name: name
+              D.O.B: dob
+              UFID: UFID
+
+-equals(Object ob) - Compares this Person with another Person object passed in
+(Remember instanceof checks!).
+                     Comparisons are based on the name, UFID and dob. If they
+                     are equal then the method returns true. false otherwise.
+
+*******************************************************************************
+Student:
+The Student class
+
+The Student class is abstract and a subclass of the Person class.
+Properties:
+----------
+1) protected Course[] courses.                // Array of courses the student
+is currently enrolled in
+2) protected final int maxCourses = 5.        // This is a constant value to
+signify that a student can't enroll in more than 5 courses
+3) protected int numCoursesEnrolled.          // Keeps track of how many
+courses the student has enrolled in
+4) protected double gpa;
+
+Constructors:
+------------
+1) public Student(String name, int UFID, String dob, double gpa)
+   // Set's the properties appropriately [HINT: Use the super-class constructor
+   (s) somehow)
+
+   the courses array is initialized to an empty array with size maxCourses.
+   numCoursesEnrolled is set to 0.
+
+2) public Student(String name, int UFID, String dob, double gpa, Course[]
+courses)
+   // Set's the properties appropriately [HINT: Use the super-class constructor
+   (s) somehow)
+
+   numCoursesEnrolled is set to to be equal to the number of non-null objects
+   in the courses array (Assume it won't be higher than maxCourses).
+
+Methods:
+--------
+get/set methods for all the properties (you should be able to figure out the
+return types/parameters):
+
+-getCourses/setCourses
+
+-getNumCoursesEnrolled/setNumCoursesEnrolled
+
+-getGpa/setGpa
+
+-addCourse(Course course) - This is a public abstract method which returns a
+boolean value. It is implemented in the subclasses.
+
+-dropCourse(Course course) - This is a public method which returns a boolean
+ value.
+                 It removes a student from the course (HINT: Use the Course
+                 class' removeStudent(...) method)
+                 If student has been removed from the course, it updates the
+                 courses array by setting the course at that
+                 index in the array to null, and updates numCoursesEnrolled
+                 appropriately.
+
+-toString() - The toString() method is public and returns a String.
+              It should return a String in this format [HINT: Use the super
+              class' toString() method somehow]:
+
+              Name: name
+              D.O.B: dob
+              UFID: UFID
+          GPA: gpa
+          Courses enrolled in:
+          Course 1:
+              [Course 1 info goes here] (HINT: Use the Course class' toString
+              method. If Course is null, just print out null)
+          Course 2:
+          [Course 2 info goes here]
+          ...
+          and so on
+
+*******************************************************************************
+UndergradStudent:
+The UndergradStudent class
+
+The UndergradStudent class is a subclass of the Student class.
+Properties:
+----------
+none (only inherited from the superclass)
+
+Constructors:
+------------
+1) public UndergradStudent(String name, int UFID, String dob, double gpa)
+   calls the superclass' constructor
+
+2) public UndergradStudent(String name, int UFID, String dob, double gpa,
+ Course[] courses)
+   calls the superclass' constructor
+
+Methods:
+--------
+-addCourse(Course course) - Implements the addCourse method declared in the
+super-class. Only adds a course if all of these conditions are satisfied:
+               1) The course number is < 5000 (greater than or equal to 5000
+                implies a graduate course)
+               2) if the number of courses the student is enrolled in is less
+               than the max number of courses the student can take
+               3) if the course can accomodate the student (HINT: Use the
+               addStudent(...) method in the Course class)
+
+               If these conditions are satisfied, the course is added to the
+               courses array - this is done by putting the course in the first
+               spot
+               which is null. Number of courses the student is enrolled in is
+               increased by 1 and the method returns true
+
+               false otherwise.
+
+-toString() - The toString() method is public and returns a String.
+              It should return a String in this format [HINT: Use the super
+              class' toString() method somehow]:
+
+          Undergrad Student:
+              Name: name
+              D.O.B: dob
+              UFID: UFID
+          GPA: gpa
+          Courses enrolled in:
+          Course 1:
+          [Course 1 info goes here] (HINT: Use the Course class' toString
+          method)
+          Course 2:
+          [Course 2 info goes here]
+          ...
+          and so on
+
+
+*******************************************************************************
+GradStudent:
+The GradStudent class
+
+The GradStudent class is a subclass of the Student class.
+Properties:
+----------
+private Course courseTA;        // the course for which the gradstudent is a TA
+
+Constructors:
+------------
+1) public GradStudent(String name, int UFID, String dob, double gpa)
+   calls the superclass' constructor
+
+2) public GradStudent(String name, int UFID, String dob, double gpa, Course[]
+ courses)
+   calls the superclass' constructor
+
+3) public GradStudent(String name, int UFID, String dob, double gpa, Course[]
+courses, Course courseTA)
+   calls the superclass' constructor and sets the other properties
+   appropriately
+
+Methods:
+--------
+-getCourseTA/setCourseTA - get/set methods for the courseTA variable
+
+
+-addCourse(Course course) - Implements the addCourse method declared in the
+super-class. Only adds a course if all of these conditions are satisfied:
+               1) The course number is >= 5000 (greater than or equal to 5000
+               implies a graduate course)
+               2) if the number of courses the student is enrolled in is less
+               than the max number of courses the student can take
+               3) if the course can accomodate the student (HINT: Use the
+               addStudent(...) method in the Course class)
+
+               If these conditions are satisfied, the course is added to the
+               courses array - this is done by putting the course in the first
+                spot
+               which is null. Number of courses the student is enrolled in is
+               increased by 1 and the method returns true
+
+               false otherwise.
+
+-toString() - The toString() method is public and returns a String.
+              It should return a String in this format [HINT: Use the super
+              class' toString() method somehow]:
+
+          Grad Student:
+              Name: name
+              D.O.B: dob
+              UFID: UFID
+          GPA: gpa
+          Courses enrolled in:
+          Course 1:
+          [Course 1 info goes here] (HINT: Use the Course class' toString
+          method. If Course is null, just print out null))
+          Course 2:
+          [Course 2 info goes here]
+          ...
+          and so on
+          Course TA for:
+          [Course TA for info goes here]
+
+*******************************************************************************
+Instructor
+The Instructor class
+
+The Instructor class is a subclass of the Person class.
+Properties:
+----------
+private Course course;      // the course being taught by the instructor
+
+Constructors:
+------------
+1) public Instructor(String name, int UFID, String dob)
+   calls the superclass' constructor
+
+2) public Instructor(String name, int UFID, String dob, Course course)
+   calls the superclass' constructor and sets the other properties
+   appropriately
+
+Methods:
+--------
+-getCourse/setCourse - get/set methods for the course variable
+
+-toString() - The toString() method is public and returns a String.
+              It should return a String in this format [HINT: Use the super
+              class' toString() method somehow]:
+
+          Instructor:
+              Name: name
+              D.O.B: dob
+              UFID: UFID
+          Course Being Taught:
+          [Course info goes here] (HINT: Use the Course class' toString method)
+
+*******************************************************************************
+Course
+The Course class
+
+Properties:
+----------
+1) private String type.            // For ex.: CIS, COP, CAP, etc.
+2) private String title.           // For ex.: Programming Fundamentals for
+CIS Majors 2
+3) private int number.             // For example, 3503, 3022, etc.
+4) private int numCredits.         // number of credits for the course
+5) private Instructor instructor.  // Instructor for the course
+6) private GradStudent[] TAs.      // the TAs for the course
+7) private Student[] students.     // Array of students
+8) private int capacity;           // maximum number of students (the size of
+the students array should be equal to this)
+9) private int currentEnrollment;  // the number of students enrolled in the
+course right now
+
+Constructors:
+------------
+1) public Course(String type, int number, String title, int numCredits)
+   // Set's the properties appropriately
+
+2) public Course(String type, int number, String title, int numCredits,
+            Instructor instructor, GradStudent[] TAs, int capacity)
+   // Set's the properties appropriately. (HINT: Use constructors already
+   defined)
+
+   Initialize the students array to be an empty array of size capacity
+   set currentEnrollment to 0
+
+Methods:
+--------
+get/set methods for all the properties (you should be able to figure out the
+return types/parameters):
+
+-getType/setType
+
+-getNumber/setNumber
+
+-getTitle/setTitle
+
+-getNumCredits/setNumCredits
+
+-getCapacity
+
+-setCapacity -Set the capacity property appropriately.
+          A new empty array is created with the new capacity.
+          Students from the old array are copied over to the new array.
+          The old array is set to the new one.
+
+-getCurrentEnrollment/setCurrentEnrollment
+
+-getStudents/setStudents
+
+-getInstructor/setInstructor -NOTE: The setInstructor method should also set
+the Instructor's course variable
+
+-getTAs/setTAs
+
+-addStudent(Student student) - This is a public method which returns a boolean
+ value depending on whether the student was successfully added or not.
+                   It will only add a student if the current enrollment is
+                   less than the capacity. If there is enough space, it
+                   adds a student to the array in the first index where there
+                   is a null object. It returns true in this case. Otherwise,
+                   it returns false.
+
+-removeStudent(Student student) - Removes a student from the students array if
+the student exists (HINT: use the .equals() method)
+                  Sets the object at that student's index to be a null object,
+                   and then decreases the currentEnrollment. It returns true
+                   in this case.
+                  If students is not found it returns false.
+
+-toString() - The toString() method is public and returns a String.
+              It should return a String in this format:
+
+              Course Info:
+              type + name           [FOR Ex. COP3503]
+              Title: title
+              Instructor: Instructor's name
+              TAs:
+          [TA 1's name]
+          [TA 2's name]
+          ...and so on
+              Number Of Students: currentEnrollment
+          Capacity: capacity
+
+*******************************************************************************
+University
+The University class
+
+Properties:
+----------
+1) private String name.            // For ex.: University of Florida
+2) private String currentTerm.     // For ex.: Fall/Spring
+3) private int year.               // For example, University of Florida
+4) private Course[] courses.       // Array of courses
+5) private Student[] students.     // Array of students
+6) private Instructor[] instructors.   // Array of instructors
+
+Constructors:
+------------
+1) public University(String name, String currentTerm, int year, Student[]
+students, Instructor[] instructors, Course[] courses)
+   // Set's the properties appropriately
+
+
+Methods:
+--------
+get/set methods for all the properties (you should be able to figure out the
+return types/parameters):
+
+-getName/setName
+
+-getCurrentTerm/setCurrentTerm
+
+-getYear/setYear
+
+-getCourses/setCourses
+
+-getStudents/setStudents
+
+-getInstructors/setInstructors
+
+-toString() - The toString() method is public and returns a String.
+              It should return a String in this format:
+
+              University Name: name
+              Current Term: currentTerm
+              Current Year: year
+              Number of Students: students.length
+              Number of Courses: courses.length
+              Number of Instructors: instructors.length
+
+*******************************************************************************
+
+Use TestDriver1 to test your solution. Compare it with our output.
+
+NOTE: This driver is NOT comprehensive - we will be using a different, more
+comprehensive driver to test your solution. So create different test cases on
+your own (using the test driver as a template).
+

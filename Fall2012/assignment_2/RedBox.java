@@ -1,3 +1,8 @@
+// Tui Popenoe
+// COP 3503 - Assignment 2
+// RedBox.java
+// ©2014
+
 import java.util.Arrays;
 import java.util.ArrayList;
 
@@ -41,8 +46,8 @@ public class RedBox {
     }
 
     public int findVideogameByTitle(String title){
-        for(int i = 0; i < this.videogames.length -1; i++){
-            if(this.videogames[i].title.equals(title)){
+        for(int i = 0; i < this.videogames.length; i++){
+            if(this.videogames[i].getTitle().equals(title)){
                 return i;
             }
         }
@@ -51,8 +56,8 @@ public class RedBox {
     }
 
     public int findMovieByTitle(String title){
-        for(int i = 0; i < this.movies.length -1; i++){
-            if(this.videogames[i].title.equals(title)){
+        for(int i = 0; i < this.movies.length; i++){
+            if(this.videogames[i].getTitle().equals(title)){
                 return i;
             }
         }
@@ -61,120 +66,74 @@ public class RedBox {
     }
 
     public Videogame getVideogameByIndex(int index){
-        if(index >= 0 && index < this.videogames.length-1){
+        if(index >= 0 && index < this.videogames.length){
             return this.videogames[index];
         }
-        // Videogame not found
-        return null;
+        else{
+            // Videogame not found
+            return null;
+        }
     }
 
     public Movie getMovieByIndex(int index){
-        if(index >= 0 && index < this.movies.length-1){
+        if(index >= 0 && index < this.movies.length){
             return this.movies[index];
         }
-        // Movie not found
-        return null;
+        else{
+            // Movie not found
+            return null;
+        }
     }
 
     public void sortVideogamesByPopularity(){
-        this.sortVideogames(this.videogames, "numTimesChecked", false);
+        Arrays.sort(this.videogames, new Videogame());
     }
 
     public void sortVideogamesByTitle(){
-        this.sortVideogames(this.videogames, "title", true);
+        Arrays.sort(this.videogames);
     }
 
     public void sortVideogamesByRating(){
-        this.sortVideogames(this.videogames, "averageRating", false);
+        Arrays.sort(this.videogames, new RatingComparison());
     }
 
     public void sortVideogamesByPlatform(){
-        this.sortVideogames(this.videogames, "platform", true);
+        Arrays.sort(this.videogames, new VideogameComparison());
     }
 
     public void sortVideogamesByReleaseDate(){
-        this.sortVideogames(this.videogames, "releaseDate", false);
+        Arrays.sort(this.videogames, new DateComparison());
     }
 
     public void sortMoviesByPopularity(){
-        this.sortMovies(this.movies, "numTimesChecked", false);
+        Arrays.sort(this.movies, new Movie());
     }
 
     public void sortMoviesByTitle(){
-        this.sortMovies(this.movies, "title", true);
+        Arrays.sort(this.movies);
     }
 
     public void sortMoviesByRating(){
-        this.sortMovies(this.movies, "averageRating", false);
+        Arrays.sort(this.movies, new RatingComparison());
     }
 
     public void sortMoviesByFormat(){
-        this.sortMovies(this.movies, "format", true);
+        Arrays.sort(this.movies, new MovieComparison());
     }
 
     public void sortMoviesByReleaseDate(){
-        this.sortMovies(this.movies, "releaseDate", false);
+        Arrays.sort(this.movies, new DateComparison());
     }
 
     public void printVideogames(){
-        for(int i = 0; i < this.videogames.length-1; i++){
-            this.videogames[i].toString();
+        for(int i = 0; i < this.videogames.length; i++){
+            System.out.println((i + 1) + ". " + this.videogames[i]);
         }
     }
 
     public void printMovies(){
-        for(int i = 0; i < this.videogames.length-1; i++){
-            this.videogames[i].toString();
-        }
-    }
-
-    public void sortMovies(Movie[] array, String propertyName,
-        boolean ascending){
-        // TODO: use quicksort
-        for(int i = 0; i < array.length -1; i++){
-            for(int j = 0; j < array.length -1; j++){
-                if(ascending){
-                    if(array[i].propertyName >
-                        array[j].propertyName){
-                        Movie temp = array[j];
-                        array[j] = array[i];
-                        array[i] = temp;
-                    }
-                }
-                else{
-                    if(array[i].propertyName <
-                       array[j].propertyName){
-                        Movie temp = array[j];
-                        array[j] = array[i];
-                        array[i] = temp;
-                    }
-                }
-            }
-        }
-    }
-
-    public void sortVideogames(Videogame[] array, String propertyName,
-        boolean ascending){
-        // TODO: use quicksort
-        for(int i = 0; i < array.length -1; i++){
-            for(int j = 0; j < array.length -1; j++){
-                if(ascending){
-                    if(array[i].propertyName >
-                        array[j].propertyName){
-                        Videogame temp = array[j];
-                        array[j] = array[i];
-                        array[i] = temp;
-                    }
-                }
-                else{
-                    if(array[i].propertyName <
-                       array[j].propertyName){
-                        Videogame temp = array[j];
-                        array[j] = array[i];
-                        array[i] = temp;
-                    }
-                }
-            }
+        for(int i = 0; i < this.videogames.length; i++){
+            System.out.println((i + 1) + ". " + this.movies[i]);
         }
     }
 }

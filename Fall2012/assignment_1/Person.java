@@ -1,3 +1,8 @@
+// Tui Popenoe
+// COP 3503 - Assignment 1
+// Person.java
+// ©2014
+
 public class Person{
     protected String name;
     protected int UFID;

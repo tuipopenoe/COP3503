@@ -1,3 +1,8 @@
+// Tui Popenoe
+// COP 3503 - Assignment 1
+// Instructor.java
+// ©2014
+
 public class Instructor extends Person{
     private Course course;
 

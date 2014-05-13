@@ -1,3 +1,8 @@
+// Tui Popenoe
+// COP 3503 - Assignment 1
+// GradStudent.java
+// ©2014
+
 public class GradStudent extends Student{
     private Course courseTa;
 

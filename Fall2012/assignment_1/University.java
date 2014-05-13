@@ -1,3 +1,8 @@
+// Tui Popenoe
+// COP 3503 - Assignment 1
+// University.java
+// ©2014
+
 public class University{
     private String name;
     private String currentTerm;

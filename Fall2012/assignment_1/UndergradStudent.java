@@ -1,3 +1,8 @@
+// Tui Popenoe
+// COP 3503 - Assignment 1
+// UndergradStudent.java
+// ©2014
+
 public class UndergradStudent extends Student{
     public UndergradStudent(String name, int UFID, String dob, double gpa){
         super(name, UFID, dob, gpa);

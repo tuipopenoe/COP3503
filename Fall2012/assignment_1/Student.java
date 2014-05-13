@@ -1,3 +1,8 @@
+// Tui Popenoe
+// COP 3503 - Assignment 1
+// Student.java
+// ©2014
+
 public abstract class Student extends Person{
     protected Course[] courses;
     protected final int maxCourses = 5;

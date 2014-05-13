@@ -1,3 +1,8 @@
+// Tui Popenoe
+// COP 3503 - Assignment 2
+// MovieComparison.java
+// ©2014
+
 import java.util.Comparator;
 
 public class MovieComparison implements Comparator<Movie>{

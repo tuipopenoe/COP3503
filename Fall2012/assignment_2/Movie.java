@@ -1,3 +1,8 @@
+// Tui Popenoe
+// COP 3503 - Assignment 2
+// Movie.java
+// ©2014
+
 public class Movie extends Rental implements Cloneable{
     private String format;
 
@@ -6,7 +11,7 @@ public class Movie extends Rental implements Cloneable{
     public Movie(String title, String genre, double averageRating,
         int numTimesChecked, Date releaseDate, String format){
         super(1.0, title, genre, averageRating, numTimesChecked, releaseDate);
-        this.format = format;
+        setFormat(format);
     }
 
     public String getFormat(){
@@ -19,12 +24,12 @@ public class Movie extends Rental implements Cloneable{
 
     public Object clone() throws CloneNotSupportedException{
         Movie clone = (Movie)super.clone();
-        clone.format = this.format;
+        clone.releaseDate = (Date)this.releaseDate.clone();
 
         return clone;
     }
 
     public String toString(){
-        return (super.toString() + "Format: " + this.format);
+        return super.toString() + ", Format: " + this.format;
     }
 }
