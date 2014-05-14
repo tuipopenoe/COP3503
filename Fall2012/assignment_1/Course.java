@@ -23,14 +23,27 @@ public class Course{
     }
 
     public Course(String type, int number, String title, int numCredits,
-        Instructor instructor, GradStudent[] TAs, int capacity){
-        this.type = type;
-        this.number = number;
-        this.title = title;
-        this.numCredits = numCredits;
+        Instructor instructor, GradStudent[] TAs){
+        this(type, number, title, numCredits);
         this.instructor = instructor;
         this.TAs = TAs;
+    }
+
+    public Course(String type, int number, String title, int numCredits,
+        Instructor instructor, GradStudent[] TAs, int capacity){
+        this(type, number, title, numCredits, instructor, TAs);
         this.capacity = capacity;
+        this.students = new Student[this.capacity];
+        this.currentEnrollment = 0;
+    }
+
+    public Course(String type, int number, String title, int numCredits,
+        Instructor instructor, GradStudent[] TAs, int capacity, Student[]
+            students){
+        this(type, number, title, numCredits, instructor, TAs);
+        this.capacity = capacity;
+        this.students = students;
+        this.currentEnrollment = students.length;
     }
 
     public String getType(){
@@ -103,32 +116,45 @@ public class Course{
 
     public void setCapacity(int capacity){
         this.capacity = capacity;
+
+        Student[] tempArray = new Student[capacity];
+
+        if(this.students != null){
+            for(int i = 0; i < students.length; i++){
+                tempArray[i] = students[i];
+            }
+        }
+
+        this.students = tempArray;
     }
 
     public boolean addStudent(Student student){
-        if(this.currentEnrollment < this.capacity){
+        if(this.getCurrentEnrollment() < this.getCapacity()){
             for(int i = 0; i < capacity; i++){
                 if(this.students[i] == null){
                     this.students[i] = student;
+                    break;
+                }
+            }
+            currentEnrollment++;
 
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public boolean removeStudent(Student student){
+        for(int i = 0; i < students.length; i++){
+            if(students[i] != null){
+                if(this.students[i].equals(student)){
+                    this.students[i] = null;
+                    this.currentEnrollment--;
                     return true;
                 }
             }
         }
-
-        return false;
-    }
-
-    public boolean removeStudent(Student student){
-        for(int i = 0; i < students.length -1; i++){
-            if(students[i].equals(student)){
-                students[i] = null;
-                this.currentEnrollment--;
-
-                return true;
-            }
-        }
-
         return false;
     }
 
@@ -139,8 +165,8 @@ public class Course{
             "Title: " + this.title + "\n" +
             "Instructor: " + this.instructor + "\n" +
             "TAs: " + "\n";
-            for(int i=0; i < this.TAs.length -1; i++){
-                courseString.concat(TAs[i].name);
+            for(int i=0; i < this.TAs.length; i++){
+                courseString.concat(TAs[i].getName());
             }
             courseString += "Number of Students: " + currentEnrollment +"\n";
             courseString += "Capacity : " + capacity + "\n";

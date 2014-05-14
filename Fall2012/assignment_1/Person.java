@@ -46,11 +46,13 @@ public class Person{
     }
 
     public boolean equals(Object ob){
-        Person p = (Person) ob;
-        if(p.getName().equals(this.name)){
-            if(p.getUFID() == this.UFID){
-                if(p.getDob().equals(this.dob)){
-                    return true;
+        if(ob instanceof Person){
+            Person p = (Person) ob;
+            if(p.getName().equals(this.name)){
+                if(p.getUFID() == this.UFID){
+                    if(p.getDob().equals(this.dob)){
+                        return true;
+                    }
                 }
             }
         }

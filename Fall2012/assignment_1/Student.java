@@ -12,6 +12,8 @@ public abstract class Student extends Person{
     public Student(String name, int UFID, String dob, double gpa){
         super(name, UFID, dob);
         this.gpa = gpa;
+        this.courses = new Course[maxCourses];
+        this.numCoursesEnrolled = 0;
     }
 
     public Student(String name, int UFID, String dob, double gpa,
@@ -19,7 +21,13 @@ public abstract class Student extends Person{
         super(name, UFID, dob);
         this.gpa = gpa;
         this.courses = courses;
-        this.numCoursesEnrolled = courses.length;
+
+        this.numCoursesEnrolled = 0;
+        for(Course i : courses){
+            if(i != null){
+                numCoursesEnrolled++;
+            }
+        }
     }
 
     public Course[] getCourses(){
@@ -63,7 +71,6 @@ public abstract class Student extends Person{
                 }
             }
         }
-
         return false;
     }
 

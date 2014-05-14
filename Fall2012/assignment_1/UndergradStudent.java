@@ -29,11 +29,10 @@ public class UndergradStudent extends Student{
             }
         }
 
-        return true;
+        return false;
     }
 
     public String toString(){
-        return  "Undergrad Student: " + "\n" +
-                super.toString();
+        return  "Undergrad Student: " + "\n" + super.toString();
     }
 }

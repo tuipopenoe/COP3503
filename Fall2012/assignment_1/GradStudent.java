@@ -4,7 +4,7 @@
 // ©2014
 
 public class GradStudent extends Student{
-    private Course courseTa;
+    private Course courseTA;
 
     public GradStudent(String name, int UFID, String dob, double gpa){
         super(name, UFID, dob, gpa);
@@ -18,30 +18,43 @@ public class GradStudent extends Student{
     public GradStudent(String name, int UFID, String dob, double gpa,
         Course[] courses, Course courseTa){
         super(name, UFID, dob, gpa, courses);
-        this.courseTa = courseTa;
+        setCourseTA(courseTA);
+    }
+
+    public Course getCourseTA(){
+        return this.courseTA;
+    }
+
+    public void setCourseTA(Course courseTA){
+        this.courseTA = courseTA;
     }
 
     public boolean addCourse(Course course){
         if(course.getNumber() >= 5000){
             if(this.numCoursesEnrolled < this.maxCourses){
-                if(course.addStudent(this)){
-                    for(int i=0; i < this.courses.length-1; i++){
+                boolean addCheck = course.addStudent(this);
+
+                if(addCheck){
+                    for(int i=0; i < this.courses.length; i++){
                         if(courses[i] == null){
                             courses[i] = course;
                             this.numCoursesEnrolled++;
-
-                            return true;
+                            break;
                         }
                     }
                 }
+
+                return addCheck;
             }
         }
 
-        return true;
+        return false;
     }
 
     public String toString(){
         return  "Grad Student: " + "\n" +
-                super.toString();
+                super.toString() + "\n" +
+                "Course TA for: " + "\n" +
+                this.courseTA;
     }
 }
