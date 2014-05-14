@@ -1,28 +1,28 @@
-COP 3503 - Project 2
+COP 3503 - Project 1
 
-Assigned: October 1, 2012
+Assigned: September 17, 2012
 
-Due: October 15, 2012 11:59 PM
+Due: September 28, 2012 11:59 PM
 
 Project Submission Guidelines
 
 UPDATE: Solution here.
+
 Description:
 
-For this project you will be modeling a simplified version of the RedBox Movie/
-Videogame Rental system. (which can be found on campus and around the city)
-
-This will include it's Customers, it's Rentals and the different ways to
-manipulate data and sort them.
-You will be using the interfaces Comparable/Comparator/Cloneable and the data
-structure ArrayList.
+For this project you will be modeling a university's system - including it's
+courses, students and instructors.
+A system like this could form the basis for a much-bigger system like ISIS or
+Sakai. You will allow students to add courses, drop courses, etc.
 You are required to create the following classes (all of them are going to be
 public classes in their own files).
 Click on the links to get the descriptions:
 
-UPDATE October 11th: There was a slight error in the description of the
-printVideogames() and printMovies method in the RedBox class. It should now
-match the Rental, Movie and Videogame toString() methods.
+UPDATE September 24: The sample TestDriver and sample output have been posted.
+
+UPDATE September 21: There was a small error in the description of the
+toString() methods for Student/UndergradStudent/GradStudent/Instructor. They
+now match with the description of the Person class.
 
 NOTE on using diff for comparison:. Use the following command for comparing
 your output file with mine (to be given later). Make sure you use it before
@@ -31,280 +31,30 @@ submitting:
 
 The "-B" ignores extra lines.
 
-NOTE:. Try to work on each class one-by-one. Don't try to implement all the
-classes in one go - work on one first and make sure it works before moving on
-to the others.
+NOTE on null objects:. Since arrays will sometimes have no objects (null
+objects), when printing out the contents of the array just print out the null
+objects.
+
+NOTE: Try to work on one class at a time and make sure they compile properly.
+Keep testing as you write more code.
 
 *******************************************************************************
-Date
-The Date class
+Person:
+The Person class
 
-The date class represents a date - month/day/year. It implements the
-interfaces Comparable and Cloneable.
-Most of the class has been provided to you. Download the Date.java file.
-
-You are required to implement the compareTo(Date date) and clone() methods.
-
-Parts of the code which you are required to fill are marked by "YOUR CODE GOES
- HERE".
+The Person class is abstract.
 Properties:
 ----------
-1) private int day.
-2) private int month.
-4) private int year.
+1) protected String name.
+2) protected int UFID.
+3) protected String dob.     // Date Of Birth = format: month/day/year. ex.:
+01/21/1990
 
 Constructors:
 ------------
-1) public Date(int month, int day, int year)
+1) public Person(String name, int UFID, String dob)
    // Set's the properties appropriately
 
-Methods:
---------
--get/set methods for all the properties (already implemented):
-
--public int compareTo(Date date):
-    Returns 1 if this date is smaller than the date passed in. (For ex.
-    Date(9,1,2011) < Date(9,1,2012) = return 1)
-    Returns -1 if this date is larger than the date passed in. (For ex.
-    Date(9,1,2011) > Date(9,1,2010) = return -1)
-    Returns 0 if the dates are equal
-
--public Object clone() throws CloneNotSupportedException:
-    Returns a deep copy
-
--toString() - The toString() method is public and returns a String.  (already
-implemented)
-              It should return a String in this format:
-              month/day/year
-
-*******************************************************************************
-Rental
-The Rental class
-
-The Rental class is an abstract class which implements Comparable<Rental> and
-Comparator<Rental>.
-
-The class represents a Rentable object and it is going to be the superclass
-for the Movie and Videogame classes.
-
-NOTE: Remember to import java.util.Comparator for this class
-
-Properties:
-----------
-1) protected String title.
-2) protected String genre.
-3) protected double costPerDay.         // cost for renting per day
-4) protected double averageRating.      // The average rating given by
-Customers
-5) protected int numTimesChecked.       // The number of times checked out by
-Customers
-6) protected boolean checkedOut.        // Whether the rental is currently
-checked out or not
-7) protected Date releaseDate.          // The release date for the Rental
-
-Constructors:
-------------
-1) public Rental()
-    empty constructor
-
-2) public Rental(double costPerDay, String title, String genre, double
-averageRating, int numTimesChecked, Date releaseDate)
-    sets the properties appropriately
-
-
-3) public Rental(double costPerDay, String title, String genre, Date
-releaseDate)
-    -sets the properties appropriately
-    -sets the averageRating to 0
-    -sets the numTimesChecked to 0
-    (HINT: Use the constructor already defined)
-
-Methods:
---------
-get/set methods for all the properties (you should be able to figure out the
-return types/parameters):
-
--getReleaseDate/setReleaseDate
-
--getTitle/setTitle
-
--getGenre/setGenre
-
--getNumTimesChecked/setNumTimesChecked
-
--getAverageRating/setAverageRating
-
--getCostPerDay/setCostPerDay
-
----------------------------------------
-METHODS FOR CHECKING OUT/IN A RENTAL:
----------------------------------------
-
--public boolean isCheckedOut()
-    Returns true if rental has been checked out, false if it hasn't.
-
--public void checkOut()
-    Checks out the rental.
-    Sets the checkout variable to true, and increments the numTimesChecked
-    variable
-
--public double checkIn(int numDays, double rating)
-    Checks in the rental.
-    Sets the checkout variable to false.
-    Updates the averageRating by including the rating given by the Customer
-    returns the total cost for renting (use numDays and costPerDay)
-
-----------------------
-INTERFACE METHODS:
-----------------------
--public int compareTo(Rental rental)
-    Does comparisons based on the title. (HINT: The String class also
-    implements Comparable)
-
--public int compare(Rental rental1, Rental rental2)
-    Does comparisons based on popularity (numTimesChecked)
-    If rental1's popularity < rental2's popularity return 1
-    If rental1's popularity > rental2's popularity return -1
-    else return 0
-
--toString() - The toString() method is public and returns a String.
-              It should return a String in this format:
-
-              title, Genre: genre, Release Date: releaseDate, Rating:
-              averageRating, Times Checked Out: numTimesChecked
-
-*******************************************************************************
-Movie
-The Movie class
-
-The class represents a Rentable Movie object.
-The Movie class is a sub-class of the Rental.
-
-It will also implement the interface Cloneable.
-
-Properties:
-----------
-1) private String format.       // DVD/Blu-Ray
-
-Constructors:
-------------
-1) public Movie()
-    empty constructor
-
-2) public Movie(String title, String genre, double averageRating, int
-numTimesChecked, Date releaseDate, String format)
-    -sets the properties appropriately
-    -sets the costPerDay to 1.0
-    (HINT: Try to use the super class' constructor)
-
-3) public Movie(String title, String genre, Date releaseDate, String format)
-    -sets the properties appropriately
-    -sets the costPerDay to 1.0
-    -sets the averageRating to 0
-    -sets the numTimesChecked to 0
-    (HINT: Try to use the constructor already defined above)
-
-Methods:
---------
-get/set methods for all the properties (you should be able to figure out the
-return types/parameters):
-
--getFormat/setFormat
-
-----------------------
-INTERFACE METHODS:
-----------------------
--public Object clone() throws CloneNotSupportedException
-    Returns a deep copy.
-
--toString() - The toString() method is public and returns a String.
-              It should return a String in this format:
-
-              title, Genre: genre, Release Date: releaseDate, Rating:
-              averageRating, Times Checked Out: numTimesChecked, Format: format
-              (HINT: Use the super class' toString() method somehow)
-
-*******************************************************************************
-Videogame
-The Videogame class
-
-The class represents a Rentable Videogame object.
-The Videogame class is a sub-class of the Rental.
-
-It will also implement the interface Cloneable.
-
-Properties:
-----------
-1) private String platform.       // PS3/Xbox360/Wii
-
-Constructors:
-------------
-1) public Videogame()
-    empty constructor
-
-2) public Videogame(String title, String genre, double averageRating, int
-numTimesChecked, Date releaseDate, String platform)
-    -sets the properties appropriately
-    -sets the costPerDay to 2.0
-    (HINT: Try to use the super class' constructor)
-
-3) public Videogame(String title, String genre, Date releaseDate, String
-platform)
-    -sets the properties appropriately
-    -sets the costPerDay to 2.0
-    -sets the averageRating to 0
-    -sets the numTimesChecked to 0
-    (HINT: Try to use the constructor already defined above)
-
-Methods:
---------
-get/set methods for all the properties (you should be able to figure out the
-return types/parameters):
-
--getPlatform/setPlatform
-
-----------------------
-INTERFACE METHODS:
-----------------------
--public Object clone() throws CloneNotSupportedException
-    Returns a deep copy.
-
--toString() - The toString() method is public and returns a String.
-              It should return a String in this format:
-
-              title, Genre: genre, Release Date: releaseDate, Rating:
-              averageRating, Times Checked Out: numTimesChecked, Platform:
-              platform
-              (HINT: Use the super class' toString() method somehow)
-
-*******************************************************************************
-Customer
-The Customer class
-
-The Customer class represents a customer - it will hold a list of currently
-checked out rentals, a list of all the items previously checked out and the
-total charges applied to the customer.
-
-
-
-NOTE: Remember to import java.util.ArrayList for this class
-Properties:
-----------
-1) private String name.                                 // the name of the
-customer
-2) private ArrayList<Rental> checkedOut;          // This ArrayList will hold
-the currently checked out Rentals by the customer
-3) private ArrayList<Rental> checkOutHistory;     // This ArrayList will hold
-the list of Rentals previously checked out by the customer
-4) private double totalCharge;                          // The total amount
-charged to the user's account
-
-Constructors:
-------------
-1) public Customer(String name)
-    Set's the name.
-    Set's totalCharge to 0.0;
-    Initializes checkedOut and checkOutHistory to empty ArrayLists.
 
 Methods:
 --------
@@ -313,243 +63,388 @@ return types/parameters):
 
 -getName/setName
 
--getCheckedOut/setCheckedOut
+-getUFID/setUFID
 
--getCheckOutHistory/setCheckOutHistory
-
--getTotalCharge/setTotalCharge
-
----------------------------------------
-METHODS FOR CHECKING OUT/IN A RENTAL:
----------------------------------------
-
--public boolean checkOut(Rental rental)
-    Tries to checkout the rental passed in.
-    -If rental is already checked out, returns false.
-    -Otherwise, checks out the rental (HINT: Which method in the Rental class
-    needs to be called?)
-    -Adds the rental to the list checkedOut and returns true
-
--public boolean checkIn(Rental rental, int numDays, double rating)
-    Tries to check in the rental.
-    -First checks if the rental is in the checkedOut list. (HINT: Which method
-    in the ArrayList class will you use?) If it's not returns false.
-    -Otherwise, tries to check the rental in (also passed in numDays and
-    rating). (HINT: Which method in the Rental class needs to be called?)
-    -Increments the totalCharge by the appropriate cost (look at the previous
-    line)
-    -Removes the rental from the checkedOut list.
-    -Adds the rental to the checkOutHistory list.
-    -Returns true.
+-getDob/setDob
 
 -toString() - The toString() method is public and returns a String.
               It should return a String in this format:
 
-              Customer Name: name
-              Total Charge: totalCharge
-              Total Rentals Currently Checked Out: size of checkedOut
-              Total Rentals Previously Checked Out: size of checkOutHistory
+              Name: name
+              D.O.B: dob
+              UFID: UFID
+
+-equals(Object ob) - Compares this Person with another Person object passed in
+(Remember instanceof checks!).
+                     Comparisons are based on the name, UFID and dob. If they
+                     are equal then the method returns true. false otherwise.
 
 *******************************************************************************
-MovieComparison
-The MovieComparison class
+Student:
+The Student class
 
-The MovieComparison class is only used for implementing the Comparator<Movie>
-interface.
-
-NOTE: Remember to import java.util.Comparator for this class
-Methods:
---------
--public int compare(Movie movie1, Movie movie2):
-    Does comparison based on the format of the movies (HINT: The String class
-    implements the Comparable interface)
-
-*******************************************************************************
-VideogameComparison
-The VideogameComparison class
-
-The VideogameComparison class is only used for implementing the
-Comparator<Videogame> interface.
-
-NOTE: Remember to import java.util.Comparator for this class
-Methods:
---------
--public int compare(Videogame videogame1, Videogame videogame2):
-    Does comparison based on the platform of the videogames (HINT: The String
-    class implements the Comparable interface)
-
-*******************************************************************************
-DateComparison
-The DateComparison class
-
-The DateComparison class is only used for implementing the Comparator<Rental>
-interface.
-
-NOTE: Remember to import java.util.Comparator for this class
-Methods:
---------
--public int compare(Rental rental1, Rental rental2):
-    Does comparison based on the release dates for the Rental objects.
-
-*******************************************************************************
-RatingComparison
-The RatingComparison class
-
-The RatingComparison class is only used for implementing the
-Comparator<Rental> interface.
-
-NOTE: Remember to import java.util.Comparator for this class
-Methods:
---------
--public int compare(Rental rental1, Rental rental2):
-    Does comparison based on the average rating of the rentals.
-    if rating of rental1 > rating of rental2, return -1
-    if rating of rental1 < rating of rental2, return 1
-    if rating of rental1 == rating of rental2, return 0
-
-*******************************************************************************
-RedBox
-The RedBox class
-
-The RedBox class is the main class which holds all the information.
-
-NOTE: Remember to import java.util.Arrays and java.util.ArrayList for this
-class
-
+The Student class is abstract and a subclass of the Person class.
 Properties:
 ----------
-1) private Videogame[] videogames.              // Array of Videogames
-2) private Movie[] movies.                      // Array of Movies
-3) private ArrayList<Customer> customers. // ArrayList of Customers
+1) protected Course[] courses.                // Array of courses the student
+is currently enrolled in
+2) protected final int maxCourses = 5.        // This is a constant value to
+signify that a student can't enroll in more than 5 courses
+3) protected int numCoursesEnrolled.          // Keeps track of how many
+courses the student has enrolled in
+4) protected double gpa;
 
 Constructors:
 ------------
-1) public RedBox(Videogame[] videogames, Movie[] movies)
-    -Set's the videogames and movies array appropriately
-    -initializes the customers ArrayList to an empty one
+1) public Student(String name, int UFID, String dob, double gpa)
+   // Set's the properties appropriately [HINT: Use the super-class constructor
+   (s) somehow)
+
+   the courses array is initialized to an empty array with size maxCourses.
+   numCoursesEnrolled is set to 0.
+
+2) public Student(String name, int UFID, String dob, double gpa, Course[]
+courses)
+   // Set's the properties appropriately [HINT: Use the super-class constructor
+   (s) somehow)
+
+   numCoursesEnrolled is set to to be equal to the number of non-null objects
+   in the courses array (Assume it won't be higher than maxCourses).
 
 Methods:
 --------
 get/set methods for all the properties (you should be able to figure out the
 return types/parameters):
 
--getVideogames/setVideogames
+-getCourses/setCourses
 
--getMovies/setMovies
+-getNumCoursesEnrolled/setNumCoursesEnrolled
 
--getCustomers/setCustomers
+-getGpa/setGpa
 
--public void addCustomer(Customer customer)
-    Adds the customer to the customers ArrayList
+-addCourse(Course course) - This is a public abstract method which returns a
+boolean value. It is implemented in the subclasses.
 
----------------------------------------
-METHODS FOR SEARCHING RENTALS:
----------------------------------------
+-dropCourse(Course course) - This is a public method which returns a boolean
+ value.
+                 It removes a student from the course (HINT: Use the Course
+                 class' removeStudent(...) method)
+                 If student has been removed from the course, it updates the
+                 courses array by setting the course at that
+                 index in the array to null, and updates numCoursesEnrolled
+                 appropriately.
 
--public int findVideogameByTitle(String title)
-    Goes through the videogames array and returns the index of the first
-    Videogame which has the same title as the one passed in.
-    Returns -1 if Videogame is not found
+-toString() - The toString() method is public and returns a String.
+              It should return a String in this format [HINT: Use the super
+              class' toString() method somehow]:
 
--public int findMovieByTitle(String title)
-    Goes through the movies array and returns the index of the first Movie
-    which has the same title as the one passed in.
-    Returns -1 if Movie is not found
+              Name: name
+              D.O.B: dob
+              UFID: UFID
+          GPA: gpa
+          Courses enrolled in:
+          Course 1:
+              [Course 1 info goes here] (HINT: Use the Course class' toString
+              method. If Course is null, just print out null)
+          Course 2:
+          [Course 2 info goes here]
+          ...
+          and so on
 
--public Videogame getVideogameByIndex(int index)
-    Returns the Videogame object at the index of the videogames array.
-    Returns null if the index is out of bounds (check for both lower and upper)
+*******************************************************************************
+UndergradStudent:
+The UndergradStudent class
 
--public Movie getMovieByIndex(int index)
-    Returns the Movie object at the index of the movies array.
-    Returns null if the index is out of bounds (check for both lower and upper)
+The UndergradStudent class is a subclass of the Student class.
+Properties:
+----------
+none (only inherited from the superclass)
 
+Constructors:
+------------
+1) public UndergradStudent(String name, int UFID, String dob, double gpa)
+   calls the superclass' constructor
 
----------------------------------------
-METHODS FOR SORTING THE ARRAYS:
----------------------------------------
+2) public UndergradStudent(String name, int UFID, String dob, double gpa,
+ Course[] courses)
+   calls the superclass' constructor
 
--public void sortVideogamesByPopularity()
-    Sorts the videogames array according to popularity (number of times it has
-    been checked out)
-    in descending order
+Methods:
+--------
+-addCourse(Course course) - Implements the addCourse method declared in the
+super-class. Only adds a course if all of these conditions are satisfied:
+               1) The course number is < 5000 (greater than or equal to 5000
+                implies a graduate course)
+               2) if the number of courses the student is enrolled in is less
+               than the max number of courses the student can take
+               3) if the course can accomodate the student (HINT: Use the
+               addStudent(...) method in the Course class)
 
--public void sortVideogamesByTitle()
-    Sorts the videogames array according to titles
-    in ascending order
+               If these conditions are satisfied, the course is added to the
+               courses array - this is done by putting the course in the first
+               spot
+               which is null. Number of courses the student is enrolled in is
+               increased by 1 and the method returns true
 
--public void sortVideogamesByRating()
-    Sorts the videogames array according to the average rating
-    in descending order
+               false otherwise.
 
--public void sortVideogamesByPlatform()
-    Sorts the videogames array according to platform (PS3/Xbox360/Wii)
-    in ascending order
+-toString() - The toString() method is public and returns a String.
+              It should return a String in this format [HINT: Use the super
+              class' toString() method somehow]:
 
--public void sortVideogamesByReleaseDate()
-    Sorts the videogames array according to release date
-    in descending order
-
-------SIMILAR SORTING METHODS FOR MOVIES:----------------
-
--public void sortMoviesByPopularity()
-    Sorts the movies array according to popularity (number of times it has
-    been checked out)
-    in descending order
-
--public void sortMoviesByTitle()
-    Sorts the movies array according to titles
-    in ascending order
-
--public void sortMoviesByRating()
-    Sorts the movies array according to the average rating
-    in descending order
-
--public void sortMoviesByFormat()
-    Sorts the movies array according to format (DVD/Blu-Ray)
-    in ascending order
-
--public void sortMoviesByReleaseDate()
-    Sorts the movies array according to release date
-    in descending order
-
----------------------------------------
-METHODS FOR PRINTING THE ARRAYS:
----------------------------------------
-
--public void printVideogames()
-    Outputs to the screen the list of all the Videogame objects in the
-    videogames array. This is what the output should look like:
-
-    1.title, Genre: genre, Release Date: releaseDate,  Rating: averageRating,
-    Times Checked Out: numTimesChecked, Platform: platform
-    2.title, Genre: genre, Release Date: releaseDate,  Rating: averageRating,
-    Times Checked Out: numTimesChecked, Platform: platform
-    3.title, Genre: genre, Release Date: releaseDate,  Rating: averageRating,
-    Times Checked Out: numTimesChecked, Platform: platform
-    4. And so forth...
-
-    (HINT: Use the Videogame class' toString() method)
+          Undergrad Student:
+              Name: name
+              D.O.B: dob
+              UFID: UFID
+          GPA: gpa
+          Courses enrolled in:
+          Course 1:
+          [Course 1 info goes here] (HINT: Use the Course class' toString
+          method)
+          Course 2:
+          [Course 2 info goes here]
+          ...
+          and so on
 
 
--public void printMovies()
-    Outputs to the screen the list of all the Movie objects in the movies
-    array. This is what the output should look like:
+*******************************************************************************
+GradStudent:
+The GradStudent class
 
-    1.title, Genre: genre, Release Date: releaseDate,  Rating: averageRating,
-    Times Checked Out: numTimesChecked, Format: format
-    2.title, Genre: genre, Release Date: releaseDate,  Rating: averageRating,
-    Times Checked Out: numTimesChecked, Format: format
-    3.title, Genre: genre, Release Date: releaseDate,  Rating: averageRating,
-    Times Checked Out: numTimesChecked, Format: format
-    4. And so forth...
+The GradStudent class is a subclass of the Student class.
+Properties:
+----------
+private Course courseTA;        // the course for which the gradstudent is a TA
 
-    (HINT: Use the Movie class' toString() method)
+Constructors:
+------------
+1) public GradStudent(String name, int UFID, String dob, double gpa)
+   calls the superclass' constructor
+
+2) public GradStudent(String name, int UFID, String dob, double gpa, Course[]
+ courses)
+   calls the superclass' constructor
+
+3) public GradStudent(String name, int UFID, String dob, double gpa, Course[]
+courses, Course courseTA)
+   calls the superclass' constructor and sets the other properties
+   appropriately
+
+Methods:
+--------
+-getCourseTA/setCourseTA - get/set methods for the courseTA variable
+
+
+-addCourse(Course course) - Implements the addCourse method declared in the
+super-class. Only adds a course if all of these conditions are satisfied:
+               1) The course number is >= 5000 (greater than or equal to 5000
+               implies a graduate course)
+               2) if the number of courses the student is enrolled in is less
+               than the max number of courses the student can take
+               3) if the course can accomodate the student (HINT: Use the
+               addStudent(...) method in the Course class)
+
+               If these conditions are satisfied, the course is added to the
+               courses array - this is done by putting the course in the first
+                spot
+               which is null. Number of courses the student is enrolled in is
+               increased by 1 and the method returns true
+
+               false otherwise.
+
+-toString() - The toString() method is public and returns a String.
+              It should return a String in this format [HINT: Use the super
+              class' toString() method somehow]:
+
+          Grad Student:
+              Name: name
+              D.O.B: dob
+              UFID: UFID
+          GPA: gpa
+          Courses enrolled in:
+          Course 1:
+          [Course 1 info goes here] (HINT: Use the Course class' toString
+          method. If Course is null, just print out null))
+          Course 2:
+          [Course 2 info goes here]
+          ...
+          and so on
+          Course TA for:
+          [Course TA for info goes here]
+
+*******************************************************************************
+Instructor
+The Instructor class
+
+The Instructor class is a subclass of the Person class.
+Properties:
+----------
+private Course course;      // the course being taught by the instructor
+
+Constructors:
+------------
+1) public Instructor(String name, int UFID, String dob)
+   calls the superclass' constructor
+
+2) public Instructor(String name, int UFID, String dob, Course course)
+   calls the superclass' constructor and sets the other properties
+   appropriately
+
+Methods:
+--------
+-getCourse/setCourse - get/set methods for the course variable
+
+-toString() - The toString() method is public and returns a String.
+              It should return a String in this format [HINT: Use the super
+              class' toString() method somehow]:
+
+          Instructor:
+              Name: name
+              D.O.B: dob
+              UFID: UFID
+          Course Being Taught:
+          [Course info goes here] (HINT: Use the Course class' toString method)
+
+*******************************************************************************
+Course
+The Course class
+
+Properties:
+----------
+1) private String type.            // For ex.: CIS, COP, CAP, etc.
+2) private String title.           // For ex.: Programming Fundamentals for
+CIS Majors 2
+3) private int number.             // For example, 3503, 3022, etc.
+4) private int numCredits.         // number of credits for the course
+5) private Instructor instructor.  // Instructor for the course
+6) private GradStudent[] TAs.      // the TAs for the course
+7) private Student[] students.     // Array of students
+8) private int capacity;           // maximum number of students (the size of
+the students array should be equal to this)
+9) private int currentEnrollment;  // the number of students enrolled in the
+course right now
+
+Constructors:
+------------
+1) public Course(String type, int number, String title, int numCredits)
+   // Set's the properties appropriately
+
+2) public Course(String type, int number, String title, int numCredits,
+            Instructor instructor, GradStudent[] TAs, int capacity)
+   // Set's the properties appropriately. (HINT: Use constructors already
+   defined)
+
+   Initialize the students array to be an empty array of size capacity
+   set currentEnrollment to 0
+
+Methods:
+--------
+get/set methods for all the properties (you should be able to figure out the
+return types/parameters):
+
+-getType/setType
+
+-getNumber/setNumber
+
+-getTitle/setTitle
+
+-getNumCredits/setNumCredits
+
+-getCapacity
+
+-setCapacity -Set the capacity property appropriately.
+          A new empty array is created with the new capacity.
+          Students from the old array are copied over to the new array.
+          The old array is set to the new one.
+
+-getCurrentEnrollment/setCurrentEnrollment
+
+-getStudents/setStudents
+
+-getInstructor/setInstructor -NOTE: The setInstructor method should also set
+the Instructor's course variable
+
+-getTAs/setTAs
+
+-addStudent(Student student) - This is a public method which returns a boolean
+ value depending on whether the student was successfully added or not.
+                   It will only add a student if the current enrollment is
+                   less than the capacity. If there is enough space, it
+                   adds a student to the array in the first index where there
+                   is a null object. It returns true in this case. Otherwise,
+                   it returns false.
+
+-removeStudent(Student student) - Removes a student from the students array if
+the student exists (HINT: use the .equals() method)
+                  Sets the object at that student's index to be a null object,
+                   and then decreases the currentEnrollment. It returns true
+                   in this case.
+                  If students is not found it returns false.
+
+-toString() - The toString() method is public and returns a String.
+              It should return a String in this format:
+
+              Course Info:
+              type + name           [FOR Ex. COP3503]
+              Title: title
+              Instructor: Instructor's name
+              TAs:
+          [TA 1's name]
+          [TA 2's name]
+          ...and so on
+              Number Of Students: currentEnrollment
+          Capacity: capacity
+
+*******************************************************************************
+University
+The University class
+
+Properties:
+----------
+1) private String name.            // For ex.: University of Florida
+2) private String currentTerm.     // For ex.: Fall/Spring
+3) private int year.               // For example, University of Florida
+4) private Course[] courses.       // Array of courses
+5) private Student[] students.     // Array of students
+6) private Instructor[] instructors.   // Array of instructors
+
+Constructors:
+------------
+1) public University(String name, String currentTerm, int year, Student[]
+students, Instructor[] instructors, Course[] courses)
+   // Set's the properties appropriately
+
+
+Methods:
+--------
+get/set methods for all the properties (you should be able to figure out the
+return types/parameters):
+
+-getName/setName
+
+-getCurrentTerm/setCurrentTerm
+
+-getYear/setYear
+
+-getCourses/setCourses
+
+-getStudents/setStudents
+
+-getInstructors/setInstructors
+
+-toString() - The toString() method is public and returns a String.
+              It should return a String in this format:
+
+              University Name: name
+              Current Term: currentTerm
+              Current Year: year
+              Number of Students: students.length
+              Number of Courses: courses.length
+              Number of Instructors: instructors.length
 
 *******************************************************************************
 
-
-Use TestDriver to test your solution. Compare it with our output.
+Use TestDriver1 to test your solution. Compare it with our output.
 
 NOTE: This driver is NOT comprehensive - we will be using a different, more
 comprehensive driver to test your solution. So create different test cases on
