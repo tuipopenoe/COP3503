@@ -136,4 +136,55 @@ public class RedBox {
             System.out.println((i + 1) + ". " + this.movies[i]);
         }
     }
+
+    public ArrayList<Integer> searchVideogamesInRange(double min, double max){
+
+        ArrayList<Integer> videogameIndices = new ArrayList<Integer>;
+
+        Videogame tempVideogame;
+        double tempRating;
+
+        for(int i = 0; i < this.videogames.size(); i++){
+            tempVideogame = this.videogames.get(i);
+            tempRating = tempVideogame.getAverageRating();
+            if(tempRating >= min && tempRating <= max){
+                videogameIndices.add(i);
+            }
+        }
+
+        return videogameIndices;
+    }
+
+    public ArrayList<Integer> searchVideogamesInRangeSorted(double min,
+        double max){
+        int totalComparisons = 0;
+        ArrayList<Integer> arrayIndices = new ArrayList<Integer>();
+
+        }
+
+    }
+
+    public int insertionSort(boolean movieCheck){
+        if(movieCheck){
+            Movie[] tempArray = this.movies;
+        }
+        else{
+            Videogame[] tempArray = this.videogames;
+        }
+
+        for(int i = 0; i < tempArray.length; i++){
+            for(int j = i; j < tempArray.length; j++){
+                if(tempArray[i] < tempArray[j]){
+                    if(movieCheck){
+                        Movie temp = tempArray[j];
+                    }
+                    else{
+                        Videogame temp = tempArray[j];
+                    }
+                    tempArray[j] = tempArray[i];
+                    tempArray[i] = temp;
+                }
+            }
+        }
+    }
 }

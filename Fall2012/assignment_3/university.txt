@@ -1,0 +1,99 @@
+University Name: University of Florida
+Current Term: Fall
+Current Year: 2012
+Number of Students: 9
+Number of Courses: 3
+Number of Instructors: 3
+Undergrad Student:
+Name: John Smith
+D.O.B: 1990/01/21
+UFID: 871311
+GPA: 3.5
+Number of Courses: 1
+Undergrad Student:
+Name: Peter Parker
+D.O.B: 1989/02/03
+UFID: 871312
+GPA: 4.0
+Number of Courses: 2
+Undergrad Student:
+Name: Rachel Smith
+D.O.B: 1990/10/01
+UFID: 871320
+GPA: 3.8
+Number of Courses: 2
+Undergrad Student:
+Name: Karen Hicks
+D.O.B: 1991/12/31
+UFID: 871322
+GPA: 3.6
+Number of Courses: 2
+Grad Student:
+Name: Alex Stark
+D.O.B: 1984/05/05
+UFID: 118491
+GPA: 3.8
+Number of Courses: 0
+Grad Student:
+Name: Mike Smith
+D.O.B: 1986/01/02
+UFID: 128191
+GPA: 3.7
+Number of Courses: 1
+Grad Student:
+Name: Nathan Rodriguez
+D.O.B: 1984/04/04
+UFID: 714133
+GPA: 3.7
+Number of Courses: 0
+Grad Student:
+Name: Katy Chu
+D.O.B: 1987/08/03
+UFID: 144211
+GPA: 3.9
+Number of Courses: 1
+Grad Student:
+Name: Jay Sanders
+D.O.B: 1987/11/03
+UFID: 144215
+GPA: 3.5
+Number of Courses: 1
+Instructor:
+Name: Shayan Javed
+D.O.B: 1985/01/01
+UFID: 119042
+Instructor:
+Name: Jack Davis
+D.O.B: 1975/10/11
+UFID: 119043
+Instructor:
+Name: Larry David
+D.O.B: 1965/02/15
+UFID: 119080
+Course:
+Programming Fundamentals
+COP 3503
+Number of Credits: 3
+Instructor: 119042
+Number of TAs: 2
+TA UFIDs: 118491;128191
+Capacity: 3;Enrollment: 3
+Student UFIDs: 871322;871320;871312
+Course:
+Advanced Networking
+CAP 5024
+Number of Credits: 3
+Instructor: 119043
+Number of TAs: 1
+TA UFIDs: 714133
+Capacity: 4;Enrollment: 3
+Student UFIDs: 144215;128191;144211
+Course:
+Sociology 101
+SOC 1001
+Number of Credits: 3
+Instructor: 119080
+Number of TAs: 2
+TA UFIDs: 144211;144215
+Capacity: 10;Enrollment: 4
+Student UFIDs: 871311;871312;871320;871322
